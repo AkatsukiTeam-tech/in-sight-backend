@@ -1,0 +1,276 @@
+application {
+    config {
+        baseName inSight,
+        applicationType monolith,
+        packageName com.app.insight,
+        authenticationType jwt,
+        databaseType sql,
+        devDatabaseType postgresql,
+        prodDatabaseType postgresql,
+        clientFramework no,
+        enableSwaggerCodegen true,
+        enableHibernateCache true,
+        cacheProvider ehcache,
+        languages [en, ru],
+    }
+    entities *
+}
+
+dto all with mapstruct
+
+enum ParentsEnum {
+    Mother,
+    Father
+}
+
+enum UniversityStatusEnum {
+    Joint
+}
+
+enum DemandEnum {
+    High,
+    Average,
+    Low
+}
+
+enum MediaFilesTypeEnum {
+    UserMaterials,
+    EducationMaterials,
+    TaskMaterials
+}
+
+enum CommentTypeEnum {
+    Post,
+    University,
+    Specialization
+}
+
+enum AppTestTypeEnum {
+    Prof,
+    Psy,
+    Personal,
+    Control
+}
+
+enum AppRoleTypeEnum {
+    ROLE_ADMIN,
+    ROLE_STUDENT,
+    ROLE_TEACHER,
+    ROLE_MANAGER
+}
+
+enum TokenTypeEnum {
+	Access,
+    Refresh
+}
+
+entity City {
+    id Long,
+    name String required
+}
+
+entity Region {
+    id Long,
+    name String required
+}
+
+entity School {
+    id Long,
+    name String required
+}
+
+entity AppUser {
+    id Long,
+    firstName String,
+    middleName String,
+    lastName String,
+    isActive Boolean,
+    isDeleted Boolean,
+    age Integer,
+    email String,
+    login String,
+    password String,
+    regDateTime ZonedDateTime,
+    phoneNumber String required unique,
+    iin String required unique,
+    coins Integer,
+    entResult Integer,
+}
+
+entity AppRole {
+    id Long,
+    name AppRoleTypeEnum
+}
+
+entity ParentsNumber {
+    id Long,
+    role ParentsEnum required,
+    number String required
+}
+
+entity Group {
+    id Long,
+    name String
+}
+
+entity Subgroup {
+    id Long,
+    name String
+}
+
+entity Subject {
+    id Long,
+    name String required
+}
+
+entity Module {
+    id Long,
+    name String
+}
+
+entity Schedule {
+    id Long,
+    dateTime ZonedDateTime required
+}
+
+entity University {
+    id Long,
+    name String required,
+    middlePrice Integer required,
+    status UniversityStatusEnum,
+    militaryDepartment Boolean,
+    description String,
+    code Integer
+}
+
+entity Specialization {
+    id Long,
+    name String,
+    grandScore Integer,
+    grandCount Integer,
+    averageSalary Integer,
+    demand DemandEnum,
+    code Integer,
+    description String
+}
+
+entity Post {
+    id Long,
+    title String,
+    description String,
+    dateTime ZonedDateTime,
+    pictureUrl String
+}
+
+entity View {
+    id Long
+}
+
+entity Comment {
+    id Long,
+    text String,
+    type CommentTypeEnum,
+    dateTime ZonedDateTime
+}
+
+entity CommentAnswer {
+    id Long,
+    text String,
+    dateTime ZonedDateTime
+}
+
+entity Task {
+    id Long,
+    description String,
+    deadline ZonedDateTime
+}
+
+entity TaskAnswer {
+    id Long,
+    description String,
+    score Double
+}
+
+entity MediaFiles {
+    id Long,
+    type String,
+    name String,
+    extensions String,
+    location String,
+    createdDate ZonedDateTime,
+    type MediaFilesTypeEnum
+}
+
+entity AppTest {
+    id Long,
+    type AppTestTypeEnum,
+    name String,
+    description String
+}
+
+entity Question {
+    id Long,
+    question String required unique
+}
+
+entity Option {
+    id Long,
+    text String,
+    isRight Boolean
+}
+
+entity OptionUser {
+    id Long,
+    dateTime ZonedDateTime
+}
+
+entity CoinsUserHistory {
+    id Long,
+    coins Integer,
+}
+
+entity TokenBlackList {
+	id Long,
+    token String,
+    disposeTime ZonedDateTime,
+    type TokenTypeEnum
+}
+
+relationship OneToMany {
+    AppUser to ParentsNumber,
+    Subgroup to Schedule,
+    City to Region,
+    City to AppUser,
+    Region to AppUser,
+    School to AppUser,
+    City to University,
+    Post to View,
+    AppUser to View,
+    Post to Comment,
+    University to Comment,
+    AppUser to Comment,
+    Comment to CommentAnswer,
+    AppUser to CommentAnswer,
+    AppUser to TaskAnswer,
+    AppUser to MediaFiles,
+    Task to MediaFiles,
+    Task to TaskAnswer,
+    TaskAnswer to MediaFiles,
+    AppTest to Question,
+    Question to Subject,
+    Question to Option,
+    AppUser to OptionUser,
+    Subject to Module,
+    Module to Schedule,
+    Module to AppTest,
+    Module to Task,
+    AppUser to CoinsUserHistory,
+    Group to Subgroup
+}
+
+relationship ManyToMany {
+    AppUser to AppRole,
+    AppUser to Subgroup,
+    Subject to Group,
+    University to Specialization
+}

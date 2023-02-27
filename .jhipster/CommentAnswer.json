@@ -1,0 +1,41 @@
+{
+  "applications": ["inSight"],
+  "changelogDate": "20230227154219",
+  "dto": "mapstruct",
+  "embedded": false,
+  "entityTableName": "comment_answer",
+  "fields": [
+    {
+      "fieldName": "id",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "text",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "dateTime",
+      "fieldType": "ZonedDateTime"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "CommentAnswer",
+  "pagination": "no",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityName": "comment",
+      "otherEntityRelationshipName": "commentAnswer",
+      "relationshipName": "comment",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "appUser",
+      "otherEntityRelationshipName": "commentAnswer",
+      "relationshipName": "appUser",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "service": "serviceClass"
+}

@@ -1,0 +1,58 @@
+{
+  "applications": ["inSight"],
+  "changelogDate": "20230227154119",
+  "dto": "mapstruct",
+  "embedded": false,
+  "entityTableName": "comment",
+  "fields": [
+    {
+      "fieldName": "id",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "text",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "type",
+      "fieldType": "CommentTypeEnum",
+      "fieldValues": "Post,University,Specialization"
+    },
+    {
+      "fieldName": "dateTime",
+      "fieldType": "ZonedDateTime"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "Comment",
+  "pagination": "no",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityName": "commentAnswer",
+      "otherEntityRelationshipName": "comment",
+      "relationshipName": "commentAnswer",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "post",
+      "otherEntityRelationshipName": "comment",
+      "relationshipName": "post",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "university",
+      "otherEntityRelationshipName": "comment",
+      "relationshipName": "university",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "appUser",
+      "otherEntityRelationshipName": "comment",
+      "relationshipName": "appUser",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "service": "serviceClass"
+}

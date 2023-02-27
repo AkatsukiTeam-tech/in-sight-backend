@@ -1,0 +1,35 @@
+{
+  "applications": ["inSight"],
+  "changelogDate": "20230227154819",
+  "dto": "mapstruct",
+  "embedded": false,
+  "entityTableName": "option",
+  "fields": [
+    {
+      "fieldName": "id",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "text",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "isRight",
+      "fieldType": "Boolean"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "Option",
+  "pagination": "no",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityName": "question",
+      "otherEntityRelationshipName": "option",
+      "relationshipName": "question",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "service": "serviceClass"
+}

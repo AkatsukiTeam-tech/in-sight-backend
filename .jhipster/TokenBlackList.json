@@ -1,0 +1,33 @@
+{
+  "applications": ["inSight"],
+  "changelogDate": "20230227155119",
+  "dto": "mapstruct",
+  "embedded": false,
+  "entityTableName": "token_black_list",
+  "fields": [
+    {
+      "fieldName": "id",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "token",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "disposeTime",
+      "fieldType": "ZonedDateTime"
+    },
+    {
+      "fieldName": "type",
+      "fieldType": "TokenTypeEnum",
+      "fieldValues": "Access,Refresh"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "TokenBlackList",
+  "pagination": "no",
+  "readOnly": false,
+  "relationships": [],
+  "service": "serviceClass"
+}

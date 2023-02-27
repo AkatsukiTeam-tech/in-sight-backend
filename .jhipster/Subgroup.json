@@ -1,0 +1,44 @@
+{
+  "applications": ["inSight"],
+  "changelogDate": "20230227153319",
+  "dto": "mapstruct",
+  "embedded": false,
+  "entityTableName": "subgroup",
+  "fields": [
+    {
+      "fieldName": "id",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "name",
+      "fieldType": "String"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "Subgroup",
+  "pagination": "no",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityName": "schedule",
+      "otherEntityRelationshipName": "subgroup",
+      "relationshipName": "schedule",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "group",
+      "otherEntityRelationshipName": "subgroup",
+      "relationshipName": "group",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "appUser",
+      "otherEntityRelationshipName": "subgroup",
+      "ownerSide": false,
+      "relationshipName": "appUser",
+      "relationshipType": "many-to-many"
+    }
+  ],
+  "service": "serviceClass"
+}

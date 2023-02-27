@@ -1,0 +1,32 @@
+{
+  "applications": ["inSight"],
+  "changelogDate": "20230227152819",
+  "dto": "mapstruct",
+  "embedded": false,
+  "entityTableName": "school",
+  "fields": [
+    {
+      "fieldName": "id",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "name",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "School",
+  "pagination": "no",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityName": "appUser",
+      "otherEntityRelationshipName": "school",
+      "relationshipName": "appUser",
+      "relationshipType": "one-to-many"
+    }
+  ],
+  "service": "serviceClass"
+}

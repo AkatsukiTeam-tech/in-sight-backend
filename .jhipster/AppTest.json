@@ -1,0 +1,46 @@
+{
+  "applications": ["inSight"],
+  "changelogDate": "20230227154619",
+  "dto": "mapstruct",
+  "embedded": false,
+  "entityTableName": "app_test",
+  "fields": [
+    {
+      "fieldName": "id",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "type",
+      "fieldType": "AppTestTypeEnum",
+      "fieldValues": "Prof,Psy,Personal,Control"
+    },
+    {
+      "fieldName": "name",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "description",
+      "fieldType": "String"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "AppTest",
+  "pagination": "no",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityName": "question",
+      "otherEntityRelationshipName": "appTest",
+      "relationshipName": "question",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "module",
+      "otherEntityRelationshipName": "appTest",
+      "relationshipName": "module",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "service": "serviceClass"
+}

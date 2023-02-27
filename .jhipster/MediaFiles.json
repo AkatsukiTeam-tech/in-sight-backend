@@ -1,0 +1,60 @@
+{
+  "applications": ["inSight"],
+  "changelogDate": "20230227154519",
+  "dto": "mapstruct",
+  "embedded": false,
+  "entityTableName": "media_files",
+  "fields": [
+    {
+      "fieldName": "id",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "type",
+      "fieldType": "MediaFilesTypeEnum",
+      "fieldValues": "UserMaterials,EducationMaterials,TaskMaterials"
+    },
+    {
+      "fieldName": "name",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "extensions",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "location",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "createdDate",
+      "fieldType": "ZonedDateTime"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "MediaFiles",
+  "pagination": "no",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityName": "appUser",
+      "otherEntityRelationshipName": "mediaFiles",
+      "relationshipName": "appUser",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "task",
+      "otherEntityRelationshipName": "mediaFiles",
+      "relationshipName": "task",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "taskAnswer",
+      "otherEntityRelationshipName": "mediaFiles",
+      "relationshipName": "taskAnswer",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "service": "serviceClass"
+}

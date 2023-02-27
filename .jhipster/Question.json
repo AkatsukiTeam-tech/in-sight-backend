@@ -1,0 +1,44 @@
+{
+  "applications": ["inSight"],
+  "changelogDate": "20230227154719",
+  "dto": "mapstruct",
+  "embedded": false,
+  "entityTableName": "question",
+  "fields": [
+    {
+      "fieldName": "id",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "question",
+      "fieldType": "String",
+      "fieldValidateRules": ["required", "unique"]
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "Question",
+  "pagination": "no",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityName": "subject",
+      "otherEntityRelationshipName": "question",
+      "relationshipName": "subject",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "option",
+      "otherEntityRelationshipName": "question",
+      "relationshipName": "option",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "appTest",
+      "otherEntityRelationshipName": "question",
+      "relationshipName": "appTest",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "service": "serviceClass"
+}

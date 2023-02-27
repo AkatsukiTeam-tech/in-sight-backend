@@ -1,0 +1,31 @@
+{
+  "applications": ["inSight"],
+  "changelogDate": "20230227155019",
+  "dto": "mapstruct",
+  "embedded": false,
+  "entityTableName": "coins_user_history",
+  "fields": [
+    {
+      "fieldName": "id",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "coins",
+      "fieldType": "Integer"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "CoinsUserHistory",
+  "pagination": "no",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityName": "appUser",
+      "otherEntityRelationshipName": "coinsUserHistory",
+      "relationshipName": "appUser",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "service": "serviceClass"
+}

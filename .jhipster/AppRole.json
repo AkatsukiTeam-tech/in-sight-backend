@@ -1,0 +1,33 @@
+{
+  "applications": ["inSight"],
+  "changelogDate": "20230227153019",
+  "dto": "mapstruct",
+  "embedded": false,
+  "entityTableName": "app_role",
+  "fields": [
+    {
+      "fieldName": "id",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "name",
+      "fieldType": "AppRoleTypeEnum",
+      "fieldValues": "ROLE_ADMIN,ROLE_STUDENT,ROLE_TEACHER,ROLE_MANAGER"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "AppRole",
+  "pagination": "no",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityName": "appUser",
+      "otherEntityRelationshipName": "appRole",
+      "ownerSide": false,
+      "relationshipName": "appUser",
+      "relationshipType": "many-to-many"
+    }
+  ],
+  "service": "serviceClass"
+}

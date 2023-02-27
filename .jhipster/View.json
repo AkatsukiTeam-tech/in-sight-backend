@@ -1,0 +1,33 @@
+{
+  "applications": ["inSight"],
+  "changelogDate": "20230227154019",
+  "dto": "mapstruct",
+  "embedded": false,
+  "entityTableName": "view",
+  "fields": [
+    {
+      "fieldName": "id",
+      "fieldType": "Long"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "View",
+  "pagination": "no",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityName": "post",
+      "otherEntityRelationshipName": "view",
+      "relationshipName": "post",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "appUser",
+      "otherEntityRelationshipName": "view",
+      "relationshipName": "appUser",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "service": "serviceClass"
+}

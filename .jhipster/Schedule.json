@@ -1,0 +1,38 @@
+{
+  "applications": ["inSight"],
+  "changelogDate": "20230227153619",
+  "dto": "mapstruct",
+  "embedded": false,
+  "entityTableName": "schedule",
+  "fields": [
+    {
+      "fieldName": "id",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "dateTime",
+      "fieldType": "ZonedDateTime",
+      "fieldValidateRules": ["required"]
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "Schedule",
+  "pagination": "no",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityName": "subgroup",
+      "otherEntityRelationshipName": "schedule",
+      "relationshipName": "subgroup",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "module",
+      "otherEntityRelationshipName": "schedule",
+      "relationshipName": "module",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "service": "serviceClass"
+}

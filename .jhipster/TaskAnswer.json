@@ -1,0 +1,47 @@
+{
+  "applications": ["inSight"],
+  "changelogDate": "20230227154419",
+  "dto": "mapstruct",
+  "embedded": false,
+  "entityTableName": "task_answer",
+  "fields": [
+    {
+      "fieldName": "id",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "description",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "score",
+      "fieldType": "Double"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "TaskAnswer",
+  "pagination": "no",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityName": "mediaFiles",
+      "otherEntityRelationshipName": "taskAnswer",
+      "relationshipName": "mediaFiles",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "appUser",
+      "otherEntityRelationshipName": "taskAnswer",
+      "relationshipName": "appUser",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "task",
+      "otherEntityRelationshipName": "taskAnswer",
+      "relationshipName": "task",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "service": "serviceClass"
+}

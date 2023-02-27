@@ -1,0 +1,49 @@
+{
+  "applications": ["inSight"],
+  "changelogDate": "20230227153919",
+  "dto": "mapstruct",
+  "embedded": false,
+  "entityTableName": "post",
+  "fields": [
+    {
+      "fieldName": "id",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "title",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "description",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "dateTime",
+      "fieldType": "ZonedDateTime"
+    },
+    {
+      "fieldName": "pictureUrl",
+      "fieldType": "String"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "Post",
+  "pagination": "no",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityName": "view",
+      "otherEntityRelationshipName": "post",
+      "relationshipName": "view",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "comment",
+      "otherEntityRelationshipName": "post",
+      "relationshipName": "comment",
+      "relationshipType": "one-to-many"
+    }
+  ],
+  "service": "serviceClass"
+}

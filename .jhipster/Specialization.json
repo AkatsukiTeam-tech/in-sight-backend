@@ -1,0 +1,57 @@
+{
+  "applications": ["inSight"],
+  "changelogDate": "20230227153819",
+  "dto": "mapstruct",
+  "embedded": false,
+  "entityTableName": "specialization",
+  "fields": [
+    {
+      "fieldName": "id",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "name",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "grandScore",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "grandCount",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "averageSalary",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "demand",
+      "fieldType": "DemandEnum",
+      "fieldValues": "High,Average,Low"
+    },
+    {
+      "fieldName": "code",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "description",
+      "fieldType": "String"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "Specialization",
+  "pagination": "no",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityName": "university",
+      "otherEntityRelationshipName": "specialization",
+      "ownerSide": false,
+      "relationshipName": "university",
+      "relationshipType": "many-to-many"
+    }
+  ],
+  "service": "serviceClass"
+}

@@ -1,0 +1,47 @@
+{
+  "applications": ["inSight"],
+  "changelogDate": "20230227154319",
+  "dto": "mapstruct",
+  "embedded": false,
+  "entityTableName": "task",
+  "fields": [
+    {
+      "fieldName": "id",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "description",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "deadline",
+      "fieldType": "ZonedDateTime"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "Task",
+  "pagination": "no",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityName": "mediaFiles",
+      "otherEntityRelationshipName": "task",
+      "relationshipName": "mediaFiles",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "taskAnswer",
+      "otherEntityRelationshipName": "task",
+      "relationshipName": "taskAnswer",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "module",
+      "otherEntityRelationshipName": "task",
+      "relationshipName": "module",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "service": "serviceClass"
+}

@@ -1,0 +1,159 @@
+{
+  "applications": ["inSight"],
+  "changelogDate": "20230227152919",
+  "dto": "mapstruct",
+  "embedded": false,
+  "entityTableName": "app_user",
+  "fields": [
+    {
+      "fieldName": "id",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "firstName",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "middleName",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "lastName",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "isActive",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "isDeleted",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "age",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "email",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "login",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "password",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "regDateTime",
+      "fieldType": "ZonedDateTime"
+    },
+    {
+      "fieldName": "phoneNumber",
+      "fieldType": "String",
+      "fieldValidateRules": ["required", "unique"]
+    },
+    {
+      "fieldName": "iin",
+      "fieldType": "String",
+      "fieldValidateRules": ["required", "unique"]
+    },
+    {
+      "fieldName": "coins",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "entResult",
+      "fieldType": "Integer"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "AppUser",
+  "pagination": "no",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityName": "parentsNumber",
+      "otherEntityRelationshipName": "appUser",
+      "relationshipName": "parentsNumber",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "view",
+      "otherEntityRelationshipName": "appUser",
+      "relationshipName": "view",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "comment",
+      "otherEntityRelationshipName": "appUser",
+      "relationshipName": "comment",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "commentAnswer",
+      "otherEntityRelationshipName": "appUser",
+      "relationshipName": "commentAnswer",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "taskAnswer",
+      "otherEntityRelationshipName": "appUser",
+      "relationshipName": "taskAnswer",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "mediaFiles",
+      "otherEntityRelationshipName": "appUser",
+      "relationshipName": "mediaFiles",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "optionUser",
+      "otherEntityRelationshipName": "appUser",
+      "relationshipName": "optionUser",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "coinsUserHistory",
+      "otherEntityRelationshipName": "appUser",
+      "relationshipName": "coinsUserHistory",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "appRole",
+      "otherEntityRelationshipName": "appUser",
+      "ownerSide": true,
+      "relationshipName": "appRole",
+      "relationshipType": "many-to-many"
+    },
+    {
+      "otherEntityName": "subgroup",
+      "otherEntityRelationshipName": "appUser",
+      "ownerSide": true,
+      "relationshipName": "subgroup",
+      "relationshipType": "many-to-many"
+    },
+    {
+      "otherEntityName": "city",
+      "otherEntityRelationshipName": "appUser",
+      "relationshipName": "city",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "region",
+      "otherEntityRelationshipName": "appUser",
+      "relationshipName": "region",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "school",
+      "otherEntityRelationshipName": "appUser",
+      "relationshipName": "school",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "service": "serviceClass"
+}

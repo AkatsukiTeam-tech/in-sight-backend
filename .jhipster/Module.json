@@ -1,0 +1,49 @@
+{
+  "applications": ["inSight"],
+  "changelogDate": "20230227153519",
+  "dto": "mapstruct",
+  "embedded": false,
+  "entityTableName": "module",
+  "fields": [
+    {
+      "fieldName": "id",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "name",
+      "fieldType": "String"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "Module",
+  "pagination": "no",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityName": "schedule",
+      "otherEntityRelationshipName": "module",
+      "relationshipName": "schedule",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "appTest",
+      "otherEntityRelationshipName": "module",
+      "relationshipName": "appTest",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "task",
+      "otherEntityRelationshipName": "module",
+      "relationshipName": "task",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "subject",
+      "otherEntityRelationshipName": "module",
+      "relationshipName": "subject",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "service": "serviceClass"
+}

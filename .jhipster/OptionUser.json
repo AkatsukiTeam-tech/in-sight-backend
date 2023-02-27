@@ -1,0 +1,31 @@
+{
+  "applications": ["inSight"],
+  "changelogDate": "20230227154919",
+  "dto": "mapstruct",
+  "embedded": false,
+  "entityTableName": "option_user",
+  "fields": [
+    {
+      "fieldName": "id",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "dateTime",
+      "fieldType": "ZonedDateTime"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "OptionUser",
+  "pagination": "no",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityName": "appUser",
+      "otherEntityRelationshipName": "optionUser",
+      "relationshipName": "appUser",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "service": "serviceClass"
+}
