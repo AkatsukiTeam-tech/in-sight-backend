@@ -2,11 +2,14 @@ package com.app.insight.domain;
 
 import com.app.insight.domain.enumeration.MediaFilesTypeEnum;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import java.io.Serializable;
-import java.time.ZonedDateTime;
-import javax.persistence.*;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
+import org.hibernate.annotations.GenericGenerator;
+
+import javax.persistence.*;
+import java.io.Serializable;
+import java.time.ZonedDateTime;
+import java.util.UUID;
 
 /**
  * A MediaFiles.
@@ -20,10 +23,10 @@ public class MediaFiles implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequenceGenerator")
-    @SequenceGenerator(name = "sequenceGenerator")
+    @GeneratedValue(generator = "uuid")
+    @GenericGenerator(name = "uuid", strategy = "uuid2")
     @Column(name = "id")
-    private Long id;
+    private UUID id;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "type")
@@ -63,25 +66,25 @@ public class MediaFiles implements Serializable {
     private AppUser appUser;
 
     @ManyToOne
-    @JsonIgnoreProperties(value = { "mediaFiles", "taskAnswers", "module" }, allowSetters = true)
+    @JsonIgnoreProperties(value = {"mediaFiles", "taskAnswers", "module"}, allowSetters = true)
     private Task task;
 
     @ManyToOne
-    @JsonIgnoreProperties(value = { "mediaFiles", "appUser", "task" }, allowSetters = true)
+    @JsonIgnoreProperties(value = {"mediaFiles", "appUser", "task"}, allowSetters = true)
     private TaskAnswer taskAnswer;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
 
-    public Long getId() {
+    public UUID getId() {
         return this.id;
     }
 
-    public MediaFiles id(Long id) {
+    public MediaFiles id(UUID id) {
         this.setId(id);
         return this;
     }
 
-    public void setId(Long id) {
+    public void setId(UUID id) {
         this.id = id;
     }
 

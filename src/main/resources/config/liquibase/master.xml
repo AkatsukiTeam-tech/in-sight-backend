@@ -58,4 +58,5 @@
     <include file="config/liquibase/changelog/20230227154919_added_entity_constraints_OptionUser.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20230227155019_added_entity_constraints_CoinsUserHistory.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20230227225420_insert_values_AppRole.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20230228000321_added_sequences.xml" relativeToChangelogFile="false"/>
 </databaseChangeLog>

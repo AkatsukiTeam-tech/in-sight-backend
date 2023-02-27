@@ -7,6 +7,7 @@ import com.app.insight.service.mapper.MediaFilesMapper;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 import java.util.stream.Collectors;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -95,7 +96,7 @@ public class MediaFilesService {
      * @return the entity.
      */
     @Transactional(readOnly = true)
-    public Optional<MediaFilesDTO> findOne(Long id) {
+    public Optional<MediaFilesDTO> findOne(UUID id) {
         log.debug("Request to get MediaFiles : {}", id);
         return mediaFilesRepository.findById(id).map(mediaFilesMapper::toDto);
     }
@@ -105,7 +106,7 @@ public class MediaFilesService {
      *
      * @param id the id of the entity.
      */
-    public void delete(Long id) {
+    public void delete(UUID id) {
         log.debug("Request to delete MediaFiles : {}", id);
         mediaFilesRepository.deleteById(id);
     }

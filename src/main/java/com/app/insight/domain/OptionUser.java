@@ -19,8 +19,8 @@ public class OptionUser implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequenceGenerator")
-    @SequenceGenerator(name = "sequenceGenerator")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "s_option_user")
+    @SequenceGenerator(name = "s_option_user", allocationSize = 1)
     @Column(name = "id")
     private Long id;
 

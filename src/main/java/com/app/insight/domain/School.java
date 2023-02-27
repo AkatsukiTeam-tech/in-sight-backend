@@ -21,8 +21,8 @@ public class School implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequenceGenerator")
-    @SequenceGenerator(name = "sequenceGenerator")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "s_school")
+    @SequenceGenerator(name = "s_school", allocationSize = 1)
     @Column(name = "id")
     private Long id;
 

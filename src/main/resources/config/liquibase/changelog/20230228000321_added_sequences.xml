@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+
+    <changeSet id="20230228000321_added_sequences" author="s.narys">
+        <sql>
+            CREATE SEQUENCE public.s_app_user
+                INCREMENT BY 1
+                MINVALUE 1
+                MAXVALUE 9223372036854775807
+                START 1
+	CACHE 1
+	NO CYCLE;
+
+            CREATE SEQUENCE public.s_app_test
+                INCREMENT BY 1
+                MINVALUE 1
+                MAXVALUE 9223372036854775807
+                START 1
+	CACHE 1
+	NO CYCLE;
+
+            CREATE SEQUENCE public.s_city
+                INCREMENT BY 1
+                MINVALUE 1
+                MAXVALUE 9223372036854775807
+                START 1
+	CACHE 1
+	NO CYCLE;
+
+            CREATE SEQUENCE public.s_coins_user_history
+                INCREMENT BY 1
+                MINVALUE 1
+                MAXVALUE 9223372036854775807
+                START 1
+	CACHE 1
+	NO CYCLE;
+
+            CREATE SEQUENCE public.s_comment
+                INCREMENT BY 1
+                MINVALUE 1
+                MAXVALUE 9223372036854775807
+                START 1
+	CACHE 1
+	NO CYCLE;
+
+            CREATE SEQUENCE public.s_comment_answer
+                INCREMENT BY 1
+                MINVALUE 1
+                MAXVALUE 9223372036854775807
+                START 1
+	CACHE 1
+	NO CYCLE;
+
+            CREATE SEQUENCE public.s_group
+                INCREMENT BY 1
+                MINVALUE 1
+                MAXVALUE 9223372036854775807
+                START 1
+	CACHE 1
+	NO CYCLE;
+
+            CREATE SEQUENCE public.s_module
+                INCREMENT BY 1
+                MINVALUE 1
+                MAXVALUE 9223372036854775807
+                START 1
+	CACHE 1
+	NO CYCLE;
+
+            CREATE SEQUENCE public.s_option
+                INCREMENT BY 1
+                MINVALUE 1
+                MAXVALUE 9223372036854775807
+                START 1
+	CACHE 1
+	NO CYCLE;
+
+            CREATE SEQUENCE public.s_option_user
+                INCREMENT BY 1
+                MINVALUE 1
+                MAXVALUE 9223372036854775807
+                START 1
+	CACHE 1
+	NO CYCLE;
+
+            CREATE SEQUENCE public.s_parents_number
+                INCREMENT BY 1
+                MINVALUE 1
+                MAXVALUE 9223372036854775807
+                START 1
+	CACHE 1
+	NO CYCLE;
+
+            CREATE SEQUENCE public.s_post
+                INCREMENT BY 1
+                MINVALUE 1
+                MAXVALUE 9223372036854775807
+                START 1
+	CACHE 1
+	NO CYCLE;
+
+            CREATE SEQUENCE public.s_question
+                INCREMENT BY 1
+                MINVALUE 1
+                MAXVALUE 9223372036854775807
+                START 1
+	CACHE 1
+	NO CYCLE;
+
+            CREATE SEQUENCE public.s_region
+                INCREMENT BY 1
+                MINVALUE 1
+                MAXVALUE 9223372036854775807
+                START 1
+	CACHE 1
+	NO CYCLE;
+
+            CREATE SEQUENCE public.s_schedule
+                INCREMENT BY 1
+                MINVALUE 1
+                MAXVALUE 9223372036854775807
+                START 1
+	CACHE 1
+	NO CYCLE;
+
+            CREATE SEQUENCE public.s_school
+                INCREMENT BY 1
+                MINVALUE 1
+                MAXVALUE 9223372036854775807
+                START 1
+	CACHE 1
+	NO CYCLE;
+
+            CREATE SEQUENCE public.s_specialization
+                INCREMENT BY 1
+                MINVALUE 1
+                MAXVALUE 9223372036854775807
+                START 1
+	CACHE 1
+	NO CYCLE;
+
+            CREATE SEQUENCE public.s_subgroup
+                INCREMENT BY 1
+                MINVALUE 1
+                MAXVALUE 9223372036854775807
+                START 1
+	CACHE 1
+	NO CYCLE;
+
+            CREATE SEQUENCE public.s_subject
+                INCREMENT BY 1
+                MINVALUE 1
+                MAXVALUE 9223372036854775807
+                START 1
+	CACHE 1
+	NO CYCLE;
+
+            CREATE SEQUENCE public.s_task
+                INCREMENT BY 1
+                MINVALUE 1
+                MAXVALUE 9223372036854775807
+                START 1
+	CACHE 1
+	NO CYCLE;
+
+            CREATE SEQUENCE public.s_task_answer
+                INCREMENT BY 1
+                MINVALUE 1
+                MAXVALUE 9223372036854775807
+                START 1
+	CACHE 1
+	NO CYCLE;
+
+            CREATE SEQUENCE public.s_token_black_list
+                INCREMENT BY 1
+                MINVALUE 1
+                MAXVALUE 9223372036854775807
+                START 1
+	CACHE 1
+	NO CYCLE;
+
+            CREATE SEQUENCE public.s_university
+                INCREMENT BY 1
+                MINVALUE 1
+                MAXVALUE 9223372036854775807
+                START 1
+	CACHE 1
+	NO CYCLE;
+
+            CREATE SEQUENCE public.s_view
+                INCREMENT BY 1
+                MINVALUE 1
+                MAXVALUE 9223372036854775807
+                START 1
+	CACHE 1
+	NO CYCLE;
+        </sql>
+    </changeSet>
+</databaseChangeLog>

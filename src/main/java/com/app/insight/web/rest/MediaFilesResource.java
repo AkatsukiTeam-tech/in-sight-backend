@@ -9,6 +9,8 @@ import java.net.URISyntaxException;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
+import java.util.UUID;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
@@ -72,7 +74,7 @@ public class MediaFilesResource {
      */
     @PutMapping("/media-files/{id}")
     public ResponseEntity<MediaFilesDTO> updateMediaFiles(
-        @PathVariable(value = "id", required = false) final Long id,
+        @PathVariable(value = "id", required = false) final UUID id,
         @RequestBody MediaFilesDTO mediaFilesDTO
     ) throws URISyntaxException {
         log.debug("REST request to update MediaFiles : {}, {}", id, mediaFilesDTO);
@@ -107,7 +109,7 @@ public class MediaFilesResource {
      */
     @PatchMapping(value = "/media-files/{id}", consumes = { "application/json", "application/merge-patch+json" })
     public ResponseEntity<MediaFilesDTO> partialUpdateMediaFiles(
-        @PathVariable(value = "id", required = false) final Long id,
+        @PathVariable(value = "id", required = false) final UUID id,
         @RequestBody MediaFilesDTO mediaFilesDTO
     ) throws URISyntaxException {
         log.debug("REST request to partial update MediaFiles partially : {}, {}", id, mediaFilesDTO);
@@ -148,7 +150,7 @@ public class MediaFilesResource {
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the mediaFilesDTO, or with status {@code 404 (Not Found)}.
      */
     @GetMapping("/media-files/{id}")
-    public ResponseEntity<MediaFilesDTO> getMediaFiles(@PathVariable Long id) {
+    public ResponseEntity<MediaFilesDTO> getMediaFiles(@PathVariable UUID id) {
         log.debug("REST request to get MediaFiles : {}", id);
         Optional<MediaFilesDTO> mediaFilesDTO = mediaFilesService.findOne(id);
         return ResponseUtil.wrapOrNotFound(mediaFilesDTO);
@@ -161,7 +163,7 @@ public class MediaFilesResource {
      * @return the {@link ResponseEntity} with status {@code 204 (NO_CONTENT)}.
      */
     @DeleteMapping("/media-files/{id}")
-    public ResponseEntity<Void> deleteMediaFiles(@PathVariable Long id) {
+    public ResponseEntity<Void> deleteMediaFiles(@PathVariable UUID id) {
         log.debug("REST request to delete MediaFiles : {}", id);
         mediaFilesService.delete(id);
         return ResponseEntity
