@@ -3,12 +3,14 @@ package com.app.insight.domain;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import java.io.Serializable;
 import java.time.ZonedDateTime;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 import javax.persistence.*;
 import javax.validation.constraints.*;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 /**
  * A AppUser.
@@ -17,7 +19,7 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 @Table(name = "app_user")
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 @SuppressWarnings("common-java:DuplicatedBlocks")
-public class AppUser implements Serializable {
+public class AppUser implements Serializable, UserDetails {
 
     private static final long serialVersionUID = 1L;
 
@@ -111,7 +113,7 @@ public class AppUser implements Serializable {
     @JsonIgnoreProperties(value = { "appUser" }, allowSetters = true)
     private Set<CoinsUserHistory> coinsUserHistories = new HashSet<>();
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
         name = "rel_app_user__app_role",
         joinColumns = @JoinColumn(name = "app_user_id"),
@@ -121,7 +123,7 @@ public class AppUser implements Serializable {
     @JsonIgnoreProperties(value = { "appUsers" }, allowSetters = true)
     private Set<AppRole> appRoles = new HashSet<>();
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
         name = "rel_app_user__subgroup",
         joinColumns = @JoinColumn(name = "app_user_id"),
@@ -131,15 +133,15 @@ public class AppUser implements Serializable {
     @JsonIgnoreProperties(value = { "schedules", "group", "appUsers" }, allowSetters = true)
     private Set<Subgroup> subgroups = new HashSet<>();
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JsonIgnoreProperties(value = { "regions", "appUsers", "universities" }, allowSetters = true)
     private City city;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JsonIgnoreProperties(value = { "appUsers", "city" }, allowSetters = true)
     private Region region;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JsonIgnoreProperties(value = { "appUsers" }, allowSetters = true)
     private School school;
 
@@ -716,5 +718,86 @@ public class AppUser implements Serializable {
             ", coins=" + getCoins() +
             ", entResult=" + getEntResult() +
             "}";
+    }
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        List<GrantedAuthority> grantedAuthorityList = new ArrayList<>();
+
+        for (AppRole appRole : getRoles()) {
+            SimpleGrantedAuthority simpleGrantedAuthority = new SimpleGrantedAuthority(appRole.getName().name());
+            grantedAuthorityList.add(simpleGrantedAuthority);
+        }
+
+        return grantedAuthorityList;
+    }
+
+    public Set<AppRole> getRoles() {
+        return this.appRoles;
+    }
+
+    @Override
+    public String getUsername() {
+        return this.login;
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return isActive;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return isActive;
+    }
+
+    public boolean isManager() {
+        for (GrantedAuthority grantedAuthority : getAuthorities()) {
+            if (grantedAuthority.getAuthority().equals("ROLE_MANAGER")) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    public boolean isStudent() {
+        for (GrantedAuthority grantedAuthority : getAuthorities()) {
+            if (grantedAuthority.getAuthority().equals("ROLE_STUDENT")) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    public boolean isAdmin() {
+        for (GrantedAuthority grantedAuthority : getAuthorities()) {
+            if (grantedAuthority.getAuthority().equals("ROLE_ADMIN")) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    public boolean isTeacher() {
+        for (GrantedAuthority grantedAuthority : getAuthorities()) {
+            if (grantedAuthority.getAuthority().equals("ROLE_TEACHER")) {
+                return true;
+            }
+        }
+
+        return false;
     }
 }

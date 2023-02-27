@@ -12,6 +12,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -20,7 +23,7 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @Service
 @Transactional
-public class AppUserService {
+public class AppUserService implements UserDetailsService {
 
     private final Logger log = LoggerFactory.getLogger(AppUserService.class);
 
@@ -119,5 +122,41 @@ public class AppUserService {
     public void delete(Long id) {
         log.debug("Request to delete AppUser : {}", id);
         appUserRepository.deleteById(id);
+    }
+
+    @Transactional
+    public Optional<AppUserDTO> findByEmail(String email) {
+        log.debug("Request to get AppUser by email : {}", email);
+        return appUserRepository.findByEmail(email).map(appUserMapper::toDto);
+    }
+
+    @Transactional
+    public Optional<AppUserDTO> findByLogin(String login) {
+        log.debug("Request to get AppUser by login : {}", login);
+        return appUserRepository.findByLogin(login).map(appUserMapper::toDto);
+    }
+
+    @Transactional
+    public Optional<AppUserDTO> findByPhone(String phone) {
+        log.debug("Request to get AppUser by phone : {}", phone);
+        return appUserRepository.findByLogin(phone).map(appUserMapper::toDto);
+    }
+
+    @Transactional
+    public Optional<AppUserDTO> findByIin(String iin) {
+        log.debug("Request to get AppUser by iin : {}", iin);
+        return appUserRepository.findByLogin(iin).map(appUserMapper::toDto);
+    }
+
+    @Override
+    public UserDetails loadUserByUsername(String login) throws UsernameNotFoundException {
+        Optional<AppUser> appUserOpt = appUserRepository.findByLogin(login);
+
+        log.debug("appUserOpt is empty : {}", appUserOpt.isEmpty());
+        if (appUserOpt.isEmpty()) {
+            throw new UsernameNotFoundException("Пользователь не найден");
+        }
+
+        return appUserOpt.get();
     }
 }

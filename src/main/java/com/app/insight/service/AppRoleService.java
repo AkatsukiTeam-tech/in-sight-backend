@@ -1,6 +1,7 @@
 package com.app.insight.service;
 
 import com.app.insight.domain.AppRole;
+import com.app.insight.domain.enumeration.AppRoleTypeEnum;
 import com.app.insight.repository.AppRoleRepository;
 import com.app.insight.service.dto.AppRoleDTO;
 import com.app.insight.service.mapper.AppRoleMapper;
@@ -98,6 +99,12 @@ public class AppRoleService {
     public Optional<AppRoleDTO> findOne(Long id) {
         log.debug("Request to get AppRole : {}", id);
         return appRoleRepository.findById(id).map(appRoleMapper::toDto);
+    }
+
+    @Transactional
+    public Optional<AppRoleDTO> findByName(AppRoleTypeEnum role) {
+        log.debug("Request to get AppRole by name: {}", role);
+        return appRoleRepository.findByName(role).map(appRoleMapper::toDto);
     }
 
     /**

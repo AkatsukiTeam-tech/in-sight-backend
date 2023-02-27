@@ -28,4 +28,12 @@ public interface AppUserRepository extends AppUserRepositoryWithBagRelationships
     default Page<AppUser> findAllWithEagerRelationships(Pageable pageable) {
         return this.fetchBagRelationships(this.findAll(pageable));
     }
+
+    Optional<AppUser> findByLogin(String login);
+
+    Optional<AppUser> findByEmail(String email);
+
+    Optional<AppUser> findByPhoneNumber(String phoneNumber);
+
+    Optional<AppUser> findByIin(String iin);
 }

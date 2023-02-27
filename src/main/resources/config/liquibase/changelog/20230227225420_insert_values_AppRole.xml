@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+
+    <!--
+        Added the entity TokenBlackList.
+    -->
+    <changeSet id="20230227225420_insert_values_AppRole" author="s.narys">
+        <sql>
+            INSERT INTO app_role (id, name)
+            VALUES (1,'ROLE_ADMIN'),
+                   (2,'ROLE_MANAGER'),
+                   (3,'ROLE_TEACHER'),
+                   (4,'ROLE_STUDENT'),
+                   (5,'ROLE_USER');
+        </sql>
+    </changeSet>
+</databaseChangeLog>

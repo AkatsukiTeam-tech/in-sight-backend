@@ -8,4 +8,5 @@ public enum AppRoleTypeEnum {
     ROLE_STUDENT,
     ROLE_TEACHER,
     ROLE_MANAGER,
+    ROLE_USER,
 }
