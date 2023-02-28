@@ -3,8 +3,12 @@ package com.app.insight.front.controllers;
 import com.app.insight.front.service.AuthService;
 import com.app.insight.service.command.LoginCommand;
 import com.app.insight.service.command.RegistrationCommand;
+import com.app.insight.service.dto.AppUserDTO;
+import com.app.insight.service.dto.SecureUserDto;
 import com.app.insight.service.dto.TokenDTO;
 import javax.validation.Valid;
+
+import com.app.insight.util.UserUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +26,9 @@ public class AuthController extends BaseController {
     @Autowired
     private AuthService authService;
 
+    @Autowired
+    private UserUtils userUtils;
+
     private final Logger log = LoggerFactory.getLogger(AuthController.class);
 
     @PostMapping("/registration")
@@ -37,6 +44,30 @@ public class AuthController extends BaseController {
         log.debug("POST /login");
         log.debug("loginCommand : " + loginCommand);
         return new ResponseEntity<>(authService.authorize(loginCommand), HttpStatus.OK);
+    }
+
+    @GetMapping("/me")
+    public ResponseEntity<SecureUserDto> getCurrentUser() {
+        AppUserDTO appUser = userUtils.getCurrentUser();
+
+        SecureUserDto secureUser = new SecureUserDto();
+        secureUser.setId(appUser.getId());
+        secureUser.setAge(appUser.getAge());
+        secureUser.setFirstName(appUser.getFirstName());
+        secureUser.setMiddleName(appUser.getMiddleName());
+        secureUser.setLastName(appUser.getLastName());
+        secureUser.setEmail(appUser.getEmail());
+        secureUser.setLogin(appUser.getLogin());
+        secureUser.setPhoneNumber(appUser.getPhoneNumber());
+        secureUser.setIin(appUser.getIin());
+        secureUser.setRegion(appUser.getRegion());
+        secureUser.setSchool(appUser.getSchool());
+        secureUser.setCoins(appUser.getCoins());
+        secureUser.setEntResult(appUser.getEntResult());
+        secureUser.setAppRoles(appUser.getAppRoles());
+        secureUser.setSubgroups(appUser.getSubgroups());
+
+        return new ResponseEntity<>(secureUser, HttpStatus.OK);
     }
 
     @PostMapping("/refresh-token")

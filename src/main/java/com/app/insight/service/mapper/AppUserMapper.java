@@ -21,11 +21,11 @@ import org.mapstruct.*;
  */
 @Mapper(componentModel = "spring")
 public interface AppUserMapper extends EntityMapper<AppUserDTO, AppUser> {
-    @Mapping(target = "appRoles", source = "appRoles", qualifiedByName = "appRoleIdSet")
-    @Mapping(target = "subgroups", source = "subgroups", qualifiedByName = "subgroupIdSet")
-    @Mapping(target = "city", source = "city", qualifiedByName = "cityId")
-    @Mapping(target = "region", source = "region", qualifiedByName = "regionId")
-    @Mapping(target = "school", source = "school", qualifiedByName = "schoolId")
+    @Mapping(target = "appRoles", source = "appRoles")
+    @Mapping(target = "subgroups", source = "subgroups")
+    @Mapping(target = "city", source = "city")
+    @Mapping(target = "region", source = "region")
+    @Mapping(target = "school", source = "school")
     AppUserDTO toDto(AppUser s);
 
     @Mapping(target = "removeAppRole", ignore = true)
