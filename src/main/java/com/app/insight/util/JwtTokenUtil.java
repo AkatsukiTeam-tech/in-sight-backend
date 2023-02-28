@@ -49,8 +49,8 @@ public class JwtTokenUtil implements Serializable {
         }
         key = Keys.hmacShaKeyFor(keyBytes);
         jwtParser = Jwts.parserBuilder().setSigningKey(key).build();
-        this.ACCESS_TOKEN_TTL = jHipsterProperties.getSecurity().getAuthentication().getJwt().getTokenValidityInSeconds();
-        this.REFRESH_TOKEN_TTL = jHipsterProperties.getSecurity().getAuthentication().getJwt().getTokenValidityInSeconds();
+        this.ACCESS_TOKEN_TTL = 1000 * jHipsterProperties.getSecurity().getAuthentication().getJwt().getTokenValidityInSeconds();
+        this.REFRESH_TOKEN_TTL = 1000 * jHipsterProperties.getSecurity().getAuthentication().getJwt().getTokenValidityInSeconds();
     }
 
     public boolean isValidToken(String authToken) {

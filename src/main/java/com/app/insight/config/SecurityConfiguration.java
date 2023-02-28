@@ -63,7 +63,6 @@ public class SecurityConfiguration {
         .and()
             .csrf()
             .disable()
-            .addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class)
             .exceptionHandling()
             .authenticationEntryPoint(problemSupport)
             .accessDeniedHandler(problemSupport)
@@ -103,7 +102,7 @@ public class SecurityConfiguration {
             .httpBasic()
         .and()
             .apply(securityConfigurerAdapter());
-        return http.build();
+        return http.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class).build();
         // @formatter:on
     }
 }

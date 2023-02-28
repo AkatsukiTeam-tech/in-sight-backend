@@ -42,7 +42,6 @@ public class AuthController extends BaseController {
     @PostMapping("/login")
     public ResponseEntity<TokenDTO> authorizeSuppliers(@Valid @RequestBody LoginCommand loginCommand) {
         log.debug("POST /login");
-        log.debug("loginCommand : " + loginCommand);
         return new ResponseEntity<>(authService.authorize(loginCommand), HttpStatus.OK);
     }
 
@@ -72,8 +71,6 @@ public class AuthController extends BaseController {
 
     @PostMapping("/refresh-token")
     public ResponseEntity<TokenDTO> refreshToken(@RequestParam String refreshToken) {
-        log.debug("POST /refresh-token");
-        log.debug("refreshTokenCommand : " + refreshToken);
         return new ResponseEntity<>(authService.refreshToken(refreshToken), HttpStatus.OK);
     }
 }
