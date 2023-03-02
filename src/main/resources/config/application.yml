@@ -23,6 +23,9 @@ spring:
 springdoc:
   api-docs:
     enabled: false
+  swagger-ui:
+    path: /swagger-ui.html
+  show-actuator: true
 ---
 management:
   endpoints:
@@ -159,9 +162,6 @@ server:
     session:
       cookie:
         http-only: true
-
-springdoc:
-  show-actuator: true
 
 # Properties to be exposed on the /info management endpoint
 info:
