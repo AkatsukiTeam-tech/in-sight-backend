@@ -21,7 +21,7 @@ import tech.jhipster.web.util.ResponseUtil;
  * REST controller for managing {@link com.app.insight.domain.Specialization}.
  */
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/admin")
 public class SpecializationResource {
 
     private final Logger log = LoggerFactory.getLogger(SpecializationResource.class);

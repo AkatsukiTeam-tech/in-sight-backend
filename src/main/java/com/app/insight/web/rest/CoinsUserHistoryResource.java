@@ -21,7 +21,7 @@ import tech.jhipster.web.util.ResponseUtil;
  * REST controller for managing {@link com.app.insight.domain.CoinsUserHistory}.
  */
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/admin")
 public class CoinsUserHistoryResource {
 
     private final Logger log = LoggerFactory.getLogger(CoinsUserHistoryResource.class);

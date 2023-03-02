@@ -21,7 +21,7 @@ import tech.jhipster.web.util.ResponseUtil;
  * REST controller for managing {@link com.app.insight.domain.Task}.
  */
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/admin")
 public class TaskResource {
 
     private final Logger log = LoggerFactory.getLogger(TaskResource.class);

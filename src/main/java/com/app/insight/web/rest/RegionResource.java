@@ -23,7 +23,7 @@ import tech.jhipster.web.util.ResponseUtil;
  * REST controller for managing {@link com.app.insight.domain.Region}.
  */
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/admin")
 public class RegionResource {
 
     private final Logger log = LoggerFactory.getLogger(RegionResource.class);

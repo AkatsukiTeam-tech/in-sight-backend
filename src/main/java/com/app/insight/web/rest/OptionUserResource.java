@@ -21,7 +21,7 @@ import tech.jhipster.web.util.ResponseUtil;
  * REST controller for managing {@link com.app.insight.domain.OptionUser}.
  */
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/admin")
 public class OptionUserResource {
 
     private final Logger log = LoggerFactory.getLogger(OptionUserResource.class);

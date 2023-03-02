@@ -21,7 +21,7 @@ import tech.jhipster.web.util.ResponseUtil;
  * REST controller for managing {@link com.app.insight.domain.AppTest}.
  */
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/admin")
 public class AppTestResource {
 
     private final Logger log = LoggerFactory.getLogger(AppTestResource.class);

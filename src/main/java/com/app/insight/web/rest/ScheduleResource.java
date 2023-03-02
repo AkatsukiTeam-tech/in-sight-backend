@@ -23,7 +23,7 @@ import tech.jhipster.web.util.ResponseUtil;
  * REST controller for managing {@link com.app.insight.domain.Schedule}.
  */
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/admin")
 public class ScheduleResource {
 
     private final Logger log = LoggerFactory.getLogger(ScheduleResource.class);

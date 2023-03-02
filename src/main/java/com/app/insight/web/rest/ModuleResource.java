@@ -21,7 +21,7 @@ import tech.jhipster.web.util.ResponseUtil;
  * REST controller for managing {@link com.app.insight.domain.Module}.
  */
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/admin")
 public class ModuleResource {
 
     private final Logger log = LoggerFactory.getLogger(ModuleResource.class);

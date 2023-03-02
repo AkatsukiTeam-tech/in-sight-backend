@@ -8,6 +8,8 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
+
+import com.app.insight.web.rest.errors.UserNotFoundError;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
@@ -139,13 +141,13 @@ public class AppUserService implements UserDetailsService {
     @Transactional
     public Optional<AppUserDTO> findByPhone(String phone) {
         log.debug("Request to get AppUser by phone : {}", phone);
-        return appUserRepository.findByLogin(phone).map(appUserMapper::toDto);
+        return appUserRepository.findByPhoneNumber(phone).map(appUserMapper::toDto);
     }
 
     @Transactional
     public Optional<AppUserDTO> findByIin(String iin) {
         log.debug("Request to get AppUser by iin : {}", iin);
-        return appUserRepository.findByLogin(iin).map(appUserMapper::toDto);
+        return appUserRepository.findByIin(iin).map(appUserMapper::toDto);
     }
 
     @Override
@@ -154,7 +156,7 @@ public class AppUserService implements UserDetailsService {
 
         log.debug("appUserOpt is empty : {}", appUserOpt.isEmpty());
         if (appUserOpt.isEmpty()) {
-            throw new UsernameNotFoundException("Пользователь не найден");
+            throw new UserNotFoundError();
         }
 
         return appUserOpt.get();
