@@ -90,6 +90,7 @@ public class InSightApp {
             "Application '{}' is running! Access URLs:\n\t" +
             "Local: \t\t{}://localhost:{}{}\n\t" +
             "External: \t{}://{}:{}{}\n\t" +
+            "Swagger: \t{}://{}:{}{}\n\t" +
             "Profile(s): \t{}\n----------------------------------------------------------",
             env.getProperty("spring.application.name"),
             protocol,
@@ -99,6 +100,10 @@ public class InSightApp {
             hostAddress,
             serverPort,
             contextPath,
+            protocol,
+            hostAddress,
+            serverPort,
+            contextPath + "swagger-ui/index.html",
             env.getActiveProfiles().length == 0 ? env.getDefaultProfiles() : env.getActiveProfiles()
         );
     }
