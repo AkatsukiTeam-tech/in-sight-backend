@@ -5,11 +5,10 @@ import com.app.insight.service.*;
 import com.app.insight.service.command.LoginCommand;
 import com.app.insight.service.command.RegistrationCommand;
 import com.app.insight.service.dto.*;
+import com.app.insight.service.mapper.SecureUserMapper;
 import com.app.insight.util.JwtTokenUtil;
+import com.app.insight.util.UserUtils;
 import com.app.insight.web.rest.errors.InvalidLoginOrPassword;
-import java.time.ZonedDateTime;
-import java.util.HashSet;
-import java.util.Locale;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +21,9 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.time.ZonedDateTime;
+import java.util.Locale;
 
 @Service
 public class AuthService {
@@ -53,6 +55,12 @@ public class AuthService {
     @Autowired
     private MessageSource messageSource;
 
+    @Autowired
+    private SecureUserMapper secureUserMapper;
+
+    @Autowired
+    private UserUtils userUtils;
+
     private final Logger log = LoggerFactory.getLogger(AuthService.class);
 
     private final Locale locale = LocaleContextHolder.getLocale();
@@ -83,7 +91,7 @@ public class AuthService {
         SecurityContextHolder.getContext().setAuthentication(usernamePasswordAuthenticationToken);
         String accessToken = jwtTokenUtil.generateAccessToken(appUser);
         String refreshToken = jwtTokenUtil.generateRefreshToken(appUser);
-        return new TokenDTO(accessToken, refreshToken);
+        return new TokenDTO(accessToken, refreshToken, getMe());
     }
 
     @Transactional
@@ -104,9 +112,14 @@ public class AuthService {
             SecurityContextHolder.getContext().setAuthentication(usernamePasswordAuthenticationToken);
             String accessToken = jwtTokenUtil.generateAccessToken(appUser);
             refreshToken = jwtTokenUtil.generateRefreshToken(appUser);
-            return new TokenDTO(accessToken, refreshToken);
+            return new TokenDTO(accessToken, refreshToken, getMe());
         }
         throw new IllegalArgumentException("not a valid refresh token");
+    }
+
+    public SecureUserDto getMe() {
+        AppUserDTO appUser = userUtils.getCurrentUser();
+        return secureUserMapper.toDto(appUser);
     }
 
     private void validateRegistrationCommand(RegistrationCommand registrationCommand) {

@@ -6,8 +6,8 @@ services:
     # volumes:
     #   - ~/volumes/jhipster/inSight/postgresql/:/var/lib/postgresql/data/
     environment:
-      - POSTGRES_USER=inSight
-      - POSTGRES_PASSWORD=
+      - POSTGRES_USER=in_sight
+      - POSTGRES_PASSWORD=123456
       - POSTGRES_HOST_AUTH_METHOD=trust
     # If you want to expose these ports outside your dev PC,
     # remove the "127.0.0.1:" prefix
