@@ -1,10 +1,9 @@
 package com.app.insight.front.service;
 
-import com.app.insight.domain.AppUser;
 import com.app.insight.service.*;
 import com.app.insight.service.command.LoginCommand;
 import com.app.insight.service.command.RegistrationCommand;
-import com.app.insight.service.command.SetNewPasswordCommand;
+import com.app.insight.service.command.ResetPasswordCommand;
 import com.app.insight.service.dto.*;
 import com.app.insight.service.mapper.SecureUserMapper;
 import com.app.insight.util.JwtTokenUtil;
@@ -12,13 +11,11 @@ import com.app.insight.util.UserUtils;
 import com.app.insight.util.Utils;
 import com.app.insight.web.rest.errors.InvalidLoginOrPassword;
 import com.app.insight.web.rest.errors.ObjectNotFoundError;
-import com.app.insight.web.rest.errors.UserNotFoundError;
 import com.app.insight.web.rest.errors.ValidationError;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
-import org.springframework.context.NoSuchMessageException;
 import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -98,10 +95,10 @@ public class AuthService {
     }
 
     @Transactional
-    public SecureUserDto setNewPassword(SetNewPasswordCommand newPasswordCommand) {
-        if (newPasswordCommand.getPassword().equals(newPasswordCommand.getPasswordConfirmation())) {
+    public SecureUserDto resetPassword(ResetPasswordCommand resetPasswordCommand) {
+        if (resetPasswordCommand.getPassword().equals(resetPasswordCommand.getPasswordConfirmation())) {
             AppUserDTO appUser = userUtils.getCurrentUser();
-            appUser.setPassword(passwordEncoder.encode(newPasswordCommand.getPassword()));
+            appUser.setPassword(passwordEncoder.encode(resetPasswordCommand.getPassword()));
             appUserService.save(appUser);
             return secureUserMapper.toDto(appUser);
         }

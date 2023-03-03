@@ -4,7 +4,7 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 
-public class SetNewPasswordCommand {
+public class ResetPasswordCommand {
 
     @NotNull
     @Pattern(

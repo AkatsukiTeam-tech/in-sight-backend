@@ -3,7 +3,7 @@ package com.app.insight.front.controllers;
 import com.app.insight.front.service.AuthService;
 import com.app.insight.service.command.LoginCommand;
 import com.app.insight.service.command.RegistrationCommand;
-import com.app.insight.service.command.SetNewPasswordCommand;
+import com.app.insight.service.command.ResetPasswordCommand;
 import com.app.insight.service.dto.GeneratedPasswordDto;
 import com.app.insight.service.dto.SecureUserDto;
 import com.app.insight.service.dto.TokenDTO;
@@ -50,8 +50,8 @@ public class AuthController extends BaseController {
         return new ResponseEntity<>(authService.refreshToken(refreshToken), HttpStatus.OK);
     }
 
-    @PutMapping("/set-new-password")
-    public ResponseEntity<SecureUserDto> setNewPassword(@RequestBody SetNewPasswordCommand newPasswordCommand) {
-        return new ResponseEntity<>(authService.setNewPassword(newPasswordCommand), HttpStatus.OK);
+    @PutMapping("/reset-password")
+    public ResponseEntity<SecureUserDto> resetPassword(@RequestBody ResetPasswordCommand newPasswordCommand) {
+        return new ResponseEntity<>(authService.resetPassword(newPasswordCommand), HttpStatus.OK);
     }
 }
