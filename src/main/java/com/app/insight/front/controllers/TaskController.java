@@ -33,19 +33,16 @@ public class TaskController extends BaseController {
     @PostMapping("/save")
     @PreAuthorize("hasAnyRole('ROLE_TEACHER', 'ROLE_ADMIN', 'ROLE_MANAGER')")
     public ResponseEntity<TaskDTO> save(@RequestBody TaskDTO createTask) {
-        log.debug("POST /save");
         return new ResponseEntity<>(taskService.save(createTask), HttpStatus.OK);
     }
 
     @PostMapping("/update")
     public ResponseEntity<TaskDTO> update(@RequestBody TaskDTO updateTask) {
-        log.debug("POST /update");
         return new ResponseEntity<>(taskService.update(updateTask), HttpStatus.OK);
     }
 
     @GetMapping("/get-all")
     public ResponseEntity<List<TaskDTO>> findAll() {
-        log.debug("GET /get-all");
         List<TaskDTO> tasks = taskService.findAll();
         return new ResponseEntity<>(tasks, HttpStatus.OK);
     }
