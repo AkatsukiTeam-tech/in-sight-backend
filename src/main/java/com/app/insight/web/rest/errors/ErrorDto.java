@@ -1,5 +1,7 @@
 package com.app.insight.web.rest.errors;
 
+import com.app.insight.config.Constants;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import java.time.LocalDateTime;
 
@@ -12,6 +14,7 @@ public class ErrorDto {
     @JsonInclude(JsonInclude.Include.NON_NULL)
     private String error;
 
+    @JsonFormat(pattern = Constants.DATE_TIME_FORMAT)
     private LocalDateTime timestamp = LocalDateTime.now();
 
     public int getStatus() {
