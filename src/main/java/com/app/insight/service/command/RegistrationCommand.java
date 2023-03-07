@@ -19,16 +19,6 @@ public class RegistrationCommand {
     private String login;
 
     @NotNull
-    @Pattern(
-        regexp = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[!?~*@#$&])(?=\\S+$).{8,}$",
-        message = "Пароль должен содержать как минимум одну прописную букву, одну строчную букву и одну цифру и одну из символов (!, ?, @, #, $, &, *, ~) и не менее 8 символов."
-    )
-    private String password;
-
-    @NotEmpty
-    private String passwordConfirmation;
-
-    @NotNull
     @Pattern(regexp = "^[0-9]{11}$", message = "Номер тел. должен состоять из 11 цифр без знака '+'")
     private String phoneNumber;
 
@@ -78,22 +68,6 @@ public class RegistrationCommand {
 
     public void setLogin(String login) {
         this.login = login;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public String getPasswordConfirmation() {
-        return passwordConfirmation;
-    }
-
-    public void setPasswordConfirmation(String passwordConfirmation) {
-        this.passwordConfirmation = passwordConfirmation;
     }
 
     public String getPhoneNumber() {

@@ -21,7 +21,7 @@ import tech.jhipster.web.util.ResponseUtil;
  * REST controller for managing {@link com.app.insight.domain.TokenBlackList}.
  */
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/admin")
 public class TokenBlackListResource {
 
     private final Logger log = LoggerFactory.getLogger(TokenBlackListResource.class);

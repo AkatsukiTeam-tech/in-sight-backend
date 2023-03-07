@@ -21,7 +21,7 @@ import tech.jhipster.web.util.ResponseUtil;
  * REST controller for managing {@link com.app.insight.domain.Group}.
  */
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/admin")
 public class GroupResource {
 
     private final Logger log = LoggerFactory.getLogger(GroupResource.class);

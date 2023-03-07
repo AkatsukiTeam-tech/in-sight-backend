@@ -23,7 +23,7 @@ import tech.jhipster.web.util.ResponseUtil;
  * REST controller for managing {@link com.app.insight.domain.Question}.
  */
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/admin")
 public class QuestionResource {
 
     private final Logger log = LoggerFactory.getLogger(QuestionResource.class);

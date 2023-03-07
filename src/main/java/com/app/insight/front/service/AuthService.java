@@ -1,19 +1,21 @@
 package com.app.insight.front.service;
 
-import com.app.insight.domain.AppUser;
 import com.app.insight.service.*;
 import com.app.insight.service.command.LoginCommand;
 import com.app.insight.service.command.RegistrationCommand;
+import com.app.insight.service.command.ResetPasswordCommand;
 import com.app.insight.service.dto.*;
 import com.app.insight.service.mapper.SecureUserMapper;
 import com.app.insight.util.JwtTokenUtil;
 import com.app.insight.util.UserUtils;
+import com.app.insight.util.Utils;
 import com.app.insight.web.rest.errors.InvalidLoginOrPassword;
+import com.app.insight.web.rest.errors.ObjectNotFoundError;
+import com.app.insight.web.rest.errors.ValidationError;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
-import org.springframework.context.NoSuchMessageException;
 import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -71,16 +73,8 @@ public class AuthService {
             throw new InvalidLoginOrPassword();
         }
 
-        AppUser user = (AppUser) appUser;
-
         if (!appUser.isEnabled()) {
-            String description;
-            try {
-                description = messageSource.getMessage("error.user_is_blocked", null, locale);
-            } catch (NoSuchMessageException exception) {
-                description = "Пользователь заблокирован. Обратитесь к администратору системы";
-            }
-            throw new RuntimeException(description);
+            throw new ValidationError(messageSource.getMessage("error.user_is_blocked", null, locale));
         }
 
         UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken = new UsernamePasswordAuthenticationToken(
@@ -95,9 +89,20 @@ public class AuthService {
     }
 
     @Transactional
-    public void registration(RegistrationCommand registrationCommand) {
+    public GeneratedPasswordDto registration(RegistrationCommand registrationCommand) {
         validateRegistrationCommand(registrationCommand);
-        createUser(registrationCommand);
+        return createUser(registrationCommand);
+    }
+
+    @Transactional
+    public SecureUserDto resetPassword(ResetPasswordCommand resetPasswordCommand) {
+        if (resetPasswordCommand.getPassword().equals(resetPasswordCommand.getPasswordConfirmation())) {
+            AppUserDTO appUser = userUtils.getCurrentUser();
+            appUser.setPassword(passwordEncoder.encode(resetPasswordCommand.getPassword()));
+            appUserService.save(appUser);
+            return secureUserMapper.toDto(appUser);
+        }
+        throw new ValidationError(messageSource.getMessage("error.passwords_dont_match", null, locale));
     }
 
     public TokenDTO refreshToken(String refreshToken) {
@@ -123,51 +128,53 @@ public class AuthService {
     }
 
     private void validateRegistrationCommand(RegistrationCommand registrationCommand) {
-        // Password validation
-        if (!registrationCommand.getPassword().equals(registrationCommand.getPasswordConfirmation())) {
-            String description = messageSource.getMessage("error.validation.password_confirmation", null, locale);
-            throw new RuntimeException(description);
-        }
 
         // email check for unique for active users
         AppUserDTO appUserExistByEmail = appUserService.findByEmail(registrationCommand.getEmail()).orElse(null);
         if (appUserExistByEmail != null) {
             if (appUserExistByEmail.getIsActive()) {
-                log.debug("email is not unique");
                 String description = messageSource.getMessage("error.validation.user.exist_email", null, locale);
-                throw new RuntimeException(description);
+                throw new ValidationError(description);
             }
         }
 
         // username check for unique
         AppUserDTO appUserExistByUsername = appUserService.findByLogin(registrationCommand.getLogin().toLowerCase()).orElse(null);
         if (appUserExistByUsername != null) {
-            log.debug("username is not unique");
             if (appUserExistByUsername.getIsActive()) {
                 String description = messageSource.getMessage("error.validation.user.exist_username", null, locale);
-                throw new RuntimeException(description);
+                throw new ValidationError(description);
             }
         }
 
         // phoneNumber check for unique
         AppUserDTO appUserExistByPhone = appUserService.findByPhone(registrationCommand.getPhoneNumber()).orElse(null);
         if (appUserExistByPhone != null) {
-            log.debug("phone is not unique");
             if (appUserExistByPhone.getIsActive()) {
-                String description = messageSource.getMessage("error.validation.user.exist_username", null, locale);
-                throw new RuntimeException(description);
+                String description = messageSource.getMessage("error.validation.user.exist_phone", null, locale);
+                throw new ValidationError(description);
+            }
+        }
+
+        // iin check for unique
+        AppUserDTO appUserExistByIin = appUserService.findByIin(registrationCommand.getIin()).orElse(null);
+        if (appUserExistByIin != null) {
+            if (appUserExistByIin.getIsActive()) {
+                String description = messageSource.getMessage("error.validation.user.exist_iin", null, locale);
+                throw new ValidationError(description);
             }
         }
 
         // parentsNumber check for notNull
         if (registrationCommand.getParentsNumbers() == null) {
-            log.debug("parentsNumber is not unique");
-            String description = messageSource.getMessage("error.validation.user.exist_username", null, locale);
-            throw new RuntimeException(description);
+            String description = messageSource.getMessage("error.validation.user.parents_number_null", null, locale);
+            throw new ValidationError(description);
         }
     }
 
-    private void createUser(RegistrationCommand registrationCommand) {
+    private GeneratedPasswordDto createUser(RegistrationCommand registrationCommand) {
+        String password = Utils.getRandomNumberString();
+
         AppUserDTO appUserDTO = new AppUserDTO();
         appUserDTO.setFirstName(registrationCommand.getFirstName());
         appUserDTO.setMiddleName(registrationCommand.getMiddleName());
@@ -178,14 +185,14 @@ public class AuthService {
         appUserDTO.setEmail(registrationCommand.getEmail());
         appUserDTO.setPhoneNumber(registrationCommand.getPhoneNumber());
         appUserDTO.setLogin(registrationCommand.getLogin());
-        appUserDTO.setPassword(passwordEncoder.encode(registrationCommand.getPassword()));
+        appUserDTO.setPassword(passwordEncoder.encode(password));
         appUserDTO.setRegDateTime(ZonedDateTime.now());
         appUserDTO.setIsActive(true);
         appUserDTO.setIsDeleted(false);
         if (registrationCommand.getRole() != null) {
             AppRoleDTO role = appRoleService
                 .findByName(registrationCommand.getRole())
-                .orElseThrow(() -> new RuntimeException("Такая роль не найдена"));
+                .orElseThrow(() -> new ObjectNotFoundError("Роль не найдена"));
             appUserDTO.getAppRoles().add(role);
         }
 
@@ -218,5 +225,7 @@ public class AuthService {
                 parentsNumberDTO.setAppUser(finalAppUserDTO);
                 parentsNumberService.save(parentsNumberDTO);
             });
+
+        return new GeneratedPasswordDto(password);
     }
 }

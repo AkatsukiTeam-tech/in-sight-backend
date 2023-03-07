@@ -3,6 +3,8 @@ package com.app.insight.front.controllers;
 import com.app.insight.front.service.AuthService;
 import com.app.insight.service.command.LoginCommand;
 import com.app.insight.service.command.RegistrationCommand;
+import com.app.insight.service.command.ResetPasswordCommand;
+import com.app.insight.service.dto.GeneratedPasswordDto;
 import com.app.insight.service.dto.SecureUserDto;
 import com.app.insight.service.dto.TokenDTO;
 import org.slf4j.Logger;
@@ -27,15 +29,13 @@ public class AuthController extends BaseController {
     private final Logger log = LoggerFactory.getLogger(AuthController.class);
 
     @PostMapping("/registration")
-    public ResponseEntity<Void> registration(@Valid @RequestBody RegistrationCommand registrationCommand) {
+    public ResponseEntity<GeneratedPasswordDto> registration(@Valid @RequestBody RegistrationCommand registrationCommand) {
         log.debug("POST /registration");
-        log.debug("registrationCommand : " + registrationCommand);
-        authService.registration(registrationCommand);
-        return new ResponseEntity<>(HttpStatus.OK);
+        return new ResponseEntity<>(authService.registration(registrationCommand), HttpStatus.OK);
     }
 
     @PostMapping("/login")
-    public ResponseEntity<TokenDTO> authorizeSuppliers(@Valid @RequestBody LoginCommand loginCommand) {
+    public ResponseEntity<TokenDTO> authorize(@Valid @RequestBody LoginCommand loginCommand) {
         log.debug("POST /login");
         return new ResponseEntity<>(authService.authorize(loginCommand), HttpStatus.OK);
     }
@@ -48,5 +48,10 @@ public class AuthController extends BaseController {
     @PostMapping("/refresh-token")
     public ResponseEntity<TokenDTO> refreshToken(@RequestParam String refreshToken) {
         return new ResponseEntity<>(authService.refreshToken(refreshToken), HttpStatus.OK);
+    }
+
+    @PutMapping("/reset-password")
+    public ResponseEntity<SecureUserDto> resetPassword(@RequestBody ResetPasswordCommand newPasswordCommand) {
+        return new ResponseEntity<>(authService.resetPassword(newPasswordCommand), HttpStatus.OK);
     }
 }

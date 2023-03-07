@@ -23,7 +23,7 @@ import tech.jhipster.web.util.ResponseUtil;
  * REST controller for managing {@link com.app.insight.domain.City}.
  */
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/admin")
 public class CityResource {
 
     private final Logger log = LoggerFactory.getLogger(CityResource.class);

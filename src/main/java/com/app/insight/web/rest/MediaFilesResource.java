@@ -23,7 +23,7 @@ import tech.jhipster.web.util.ResponseUtil;
  * REST controller for managing {@link com.app.insight.domain.MediaFiles}.
  */
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/admin")
 public class MediaFilesResource {
 
     private final Logger log = LoggerFactory.getLogger(MediaFilesResource.class);

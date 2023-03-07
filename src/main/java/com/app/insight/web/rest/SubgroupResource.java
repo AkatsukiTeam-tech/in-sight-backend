@@ -21,7 +21,7 @@ import tech.jhipster.web.util.ResponseUtil;
  * REST controller for managing {@link com.app.insight.domain.Subgroup}.
  */
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/admin")
 public class SubgroupResource {
 
     private final Logger log = LoggerFactory.getLogger(SubgroupResource.class);
