@@ -7,12 +7,12 @@ public class ErrorDto {
 
     int status;
 
-    public String detail;
+    private String detail;
 
     @JsonInclude(JsonInclude.Include.NON_NULL)
-    public String error;
+    private String error;
 
-    public LocalDateTime timestamp = LocalDateTime.now();
+    private LocalDateTime timestamp = LocalDateTime.now();
 
     public int getStatus() {
         return status;
