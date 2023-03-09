@@ -33,9 +33,9 @@ spring:
       enabled: false
   datasource:
     type: com.zaxxer.hikari.HikariDataSource
-    url: jdbc:postgresql://localhost:5432/inSight
-    username: inSight
-    password:
+    url: jdbc:postgresql://localhost:5432/in_sight
+    username: in_sight
+    password: 123456
     hikari:
       poolName: Hikari
       auto-commit: false
@@ -48,10 +48,16 @@ spring:
   liquibase:
     contexts: prod
   mail:
-    host: localhost
-    port: 25
-    username:
-    password:
+    host: smtp.gmail.com
+    port: 587
+    username: your_email              # specify your gmail
+    password: password                # 16 code
+    protocol: smtp
+    properties.mail.smtp:
+      auth: true
+      starttls.enable: true
+      ssl.trust: smtp.gmail.com
+
   thymeleaf:
     cache: true
 

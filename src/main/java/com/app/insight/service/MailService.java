@@ -1,13 +1,13 @@
 package com.app.insight.service;
 
 import com.app.insight.domain.User;
-import java.nio.charset.StandardCharsets;
-import java.util.Locale;
-import javax.mail.MessagingException;
-import javax.mail.internet.MimeMessage;
+import com.app.insight.service.dto.AppUserDTO;
+import com.app.insight.util.Utils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.MessageSource;
+import org.springframework.context.i18n.LocaleContextHolder;
+import org.springframework.data.annotation.ReadOnlyProperty;
 import org.springframework.mail.MailException;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
@@ -16,6 +16,12 @@ import org.springframework.stereotype.Service;
 import org.thymeleaf.context.Context;
 import org.thymeleaf.spring5.SpringTemplateEngine;
 import tech.jhipster.config.JHipsterProperties;
+
+import javax.mail.MessagingException;
+import javax.mail.internet.MimeMessage;
+import java.nio.charset.StandardCharsets;
+import java.text.MessageFormat;
+import java.util.Locale;
 
 /**
  * Service for sending emails.
@@ -28,8 +34,7 @@ public class MailService {
     private final Logger log = LoggerFactory.getLogger(MailService.class);
 
     private static final String USER = "user";
-
-    private static final String BASE_URL = "baseUrl";
+    private String BASE_URL;
 
     private final JHipsterProperties jHipsterProperties;
 
@@ -93,9 +98,13 @@ public class MailService {
     }
 
     @Async
-    public void sendActivationEmail(User user) {
-        log.debug("Sending activation email to '{}'", user.getEmail());
-        sendEmailFromTemplate(user, "mail/activationEmail", "email.activation.title");
+    public void sendAdminPasswordMail(AppUserDTO user, String title, String adminPassword) {
+        String locale = LocaleContextHolder.getLocale().getLanguage();
+        sendEmail(user.getEmail(), title, toTemplate(
+            locale,
+            Utils.getLocalizedMessage(messageSource, "email.send.admin.password.title"),
+            MessageFormat.format(Utils.getLocalizedMessage(messageSource, "email.send.admin.password.body"), user.getLogin(), adminPassword)
+        ), false, true);
     }
 
     @Async
@@ -104,9 +113,13 @@ public class MailService {
         sendEmailFromTemplate(user, "mail/creationEmail", "email.activation.title");
     }
 
-    @Async
-    public void sendPasswordResetMail(User user) {
-        log.debug("Sending password reset email to '{}'", user.getEmail());
-        sendEmailFromTemplate(user, "mail/passwordResetEmail", "email.reset.title");
+    @ReadOnlyProperty
+    private String toTemplate(String locale, String title, String body) {
+        String template = "<!DOCTYPE html>\n\n<html lang=\"" +
+            locale + "\">\n\n  <head>\n\n" +
+            title + "\n\n  <meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\" />\n\n  <link rel=\"icon\" href=\"http://127.0.0.1:8080/favicon.ico\" />\n\n  </head>\n\n  <body>\n\n" +
+            body + "\n\n</body>\n\n</html>";
+        log.debug("toTemplate '{}'", template);
+        return template;
     }
 }
