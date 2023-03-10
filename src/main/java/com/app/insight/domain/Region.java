@@ -52,9 +52,10 @@ public class Region implements Serializable {
     )
     private Set<AppUser> appUsers = new HashSet<>();
 
-    @ManyToOne
-    @JsonIgnoreProperties(value = { "regions", "appUsers", "universities" }, allowSetters = true)
-    private City city;
+    @OneToMany(mappedBy = "region")
+    @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
+    @JsonIgnoreProperties(value = { "appUsers", "universities" }, allowSetters = true)
+    private Set<City> cities = new HashSet<>();
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
 
@@ -115,16 +116,33 @@ public class Region implements Serializable {
         return this;
     }
 
-    public City getCity() {
-        return this.city;
+    public Set<City> getCities() {
+        return cities;
     }
 
-    public void setCity(City city) {
-        this.city = city;
+    public void setCities(Set<City> cities) {
+        if (this.cities != null) {
+            this.cities.forEach(i -> i.setRegion(null));
+        }
+        if (cities != null) {
+            cities.forEach(i -> i.setRegion(this));
+        }
+        this.cities = cities;
     }
 
-    public Region city(City city) {
-        this.setCity(city);
+    public Region regions(Set<City> cities) {
+        this.setCities(cities);
+        return this;
+    }
+
+    public Region addCity(City city) {
+        this.getCities().add(city);
+        return this;
+    }
+
+    public Region removeCity(City city) {
+        this.cities.remove(city);
+        city.setRegion(null);
         return this;
     }
 

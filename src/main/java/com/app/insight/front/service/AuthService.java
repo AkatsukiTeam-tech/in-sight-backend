@@ -200,12 +200,12 @@ public class AuthService {
         }
 
         if (registrationCommand.getCity().getId() == null) {
-            // create city if it doesn't exist
-            CityDTO saveCity = cityService.save(registrationCommand.getCity());
-
-            // after create region
-            registrationCommand.getRegion().setCity(saveCity);
+            // create region if it doesn't exist
             RegionDTO saveRegion = regionService.save(registrationCommand.getRegion());
+
+            // after create city
+            registrationCommand.getCity().setRegion(saveRegion);
+            CityDTO saveCity = cityService.save(registrationCommand.getCity());
             appUserDTO.setCity(saveCity);
             appUserDTO.setRegion(saveRegion);
         } else {

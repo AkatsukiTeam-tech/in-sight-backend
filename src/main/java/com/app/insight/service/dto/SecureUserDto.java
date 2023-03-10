@@ -30,7 +30,7 @@ public class SecureUserDto {
 
     private Set<SubgroupDTO> subgroups = new HashSet<>();
 
-    private RegionDTO region;
+    private CityDTO city;
 
     private SchoolDTO school;
 
@@ -138,12 +138,12 @@ public class SecureUserDto {
         this.subgroups = subgroups;
     }
 
-    public RegionDTO getRegion() {
-        return region;
+    public CityDTO getCity() {
+        return city;
     }
 
-    public void setRegion(RegionDTO region) {
-        this.region = region;
+    public void setCity(CityDTO city) {
+        this.city = city;
     }
 
     public SchoolDTO getSchool() {

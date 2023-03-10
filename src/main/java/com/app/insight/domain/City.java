@@ -30,10 +30,9 @@ public class City implements Serializable {
     @Column(name = "name", nullable = false)
     private String name;
 
-    @OneToMany(mappedBy = "city")
-    @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-    @JsonIgnoreProperties(value = { "appUsers", "city" }, allowSetters = true)
-    private Set<Region> regions = new HashSet<>();
+    @ManyToOne
+    @JsonIgnoreProperties(value = { "cities", "appUsers" }, allowSetters = true)
+    private Region region;
 
     @OneToMany(mappedBy = "city")
     @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
@@ -90,34 +89,16 @@ public class City implements Serializable {
         this.name = name;
     }
 
-    public Set<Region> getRegions() {
-        return this.regions;
+    public Region getRegion() {
+        return region;
     }
 
-    public void setRegions(Set<Region> regions) {
-        if (this.regions != null) {
-            this.regions.forEach(i -> i.setCity(null));
-        }
-        if (regions != null) {
-            regions.forEach(i -> i.setCity(this));
-        }
-        this.regions = regions;
+    public void setRegion(Region region) {
+        this.region = region;
     }
 
-    public City regions(Set<Region> regions) {
-        this.setRegions(regions);
-        return this;
-    }
-
-    public City addRegion(Region region) {
-        this.regions.add(region);
-        region.setCity(this);
-        return this;
-    }
-
-    public City removeRegion(Region region) {
-        this.regions.remove(region);
-        region.setCity(null);
+    public City regions(Region region) {
+        this.setRegion(region);
         return this;
     }
 

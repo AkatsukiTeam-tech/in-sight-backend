@@ -59,4 +59,6 @@
     <include file="config/liquibase/changelog/20230227155019_added_entity_constraints_CoinsUserHistory.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20230227225420_insert_values_AppRole.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20230228000321_added_sequences.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20230310152822_update_region_city_relationship.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20230310160123_create_default_admin.xml" relativeToChangelogFile="false"/>
 </databaseChangeLog>
