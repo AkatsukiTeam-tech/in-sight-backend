@@ -8,7 +8,6 @@ import com.app.insight.service.dto.*;
 import com.app.insight.service.mapper.SecureUserMapper;
 import com.app.insight.util.JwtTokenUtil;
 import com.app.insight.util.UserUtils;
-import com.app.insight.util.Utils;
 import com.app.insight.web.rest.errors.InvalidLoginOrPassword;
 import com.app.insight.web.rest.errors.ObjectNotFoundError;
 import com.app.insight.web.rest.errors.ValidationError;
@@ -23,6 +22,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import tech.jhipster.security.RandomUtil;
 
 import java.time.ZonedDateTime;
 import java.util.Locale;
@@ -62,6 +62,9 @@ public class AuthService {
 
     @Autowired
     private UserUtils userUtils;
+
+    @Autowired
+    private MailService mailService;
 
     private final Logger log = LoggerFactory.getLogger(AuthService.class);
 
@@ -173,7 +176,7 @@ public class AuthService {
     }
 
     private GeneratedPasswordDto createUser(RegistrationCommand registrationCommand) {
-        String password = Utils.getRandomNumberString();
+        String password = RandomUtil.generatePassword();
 
         AppUserDTO appUserDTO = new AppUserDTO();
         appUserDTO.setFirstName(registrationCommand.getFirstName());
@@ -225,6 +228,7 @@ public class AuthService {
                 parentsNumberDTO.setAppUser(finalAppUserDTO);
                 parentsNumberService.save(parentsNumberDTO);
             });
+        mailService.sendCreationEmail(finalAppUserDTO, password);
 
         return new GeneratedPasswordDto(password);
     }

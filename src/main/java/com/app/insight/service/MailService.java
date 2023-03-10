@@ -32,6 +32,7 @@ import java.util.Locale;
 public class MailService {
 
     private final Logger log = LoggerFactory.getLogger(MailService.class);
+    private final String LOCALE = LocaleContextHolder.getLocale().getLanguage();
 
     private static final String USER = "user";
     private String BASE_URL;
@@ -98,19 +99,24 @@ public class MailService {
     }
 
     @Async
-    public void sendAdminPasswordMail(AppUserDTO user, String title, String adminPassword) {
-        String locale = LocaleContextHolder.getLocale().getLanguage();
-        sendEmail(user.getEmail(), title, toTemplate(
-            locale,
-            Utils.getLocalizedMessage(messageSource, "email.send.admin.password.title"),
-            MessageFormat.format(Utils.getLocalizedMessage(messageSource, "email.send.admin.password.body"), user.getLogin(), adminPassword)
-        ), false, true);
+    public void sendAdminPasswordMail(AppUserDTO user, String adminPassword) {
+        sendEmail(user.getEmail(), Utils.getLocalizedMessage(messageSource, "email.send.admin.password.header"),
+            toTemplate(
+                LOCALE,
+                Utils.getLocalizedMessage(messageSource, "email.send.admin.password.title"),
+                MessageFormat.format(Utils.getLocalizedMessage(messageSource, "email.send.admin.password.body"), user.getLogin(), adminPassword)
+            ), false, true);
     }
 
     @Async
-    public void sendCreationEmail(User user) {
-        log.debug("Sending creation email to '{}'", user.getEmail());
-        sendEmailFromTemplate(user, "mail/creationEmail", "email.activation.title");
+    public void sendCreationEmail(AppUserDTO user, String userPassword) {
+        sendEmail(user.getEmail(), Utils.getLocalizedMessage(messageSource, "email.create.account.header"),
+            toTemplate(
+                LOCALE,
+                Utils.getLocalizedMessage(messageSource, "email.create.account.title"),
+                MessageFormat.format(Utils.getLocalizedMessage(messageSource, "email.create.account.body"), user.getLogin(), userPassword)
+            ),
+            false, true);
     }
 
     @ReadOnlyProperty
