@@ -8,6 +8,7 @@ import com.app.insight.service.dto.*;
 import com.app.insight.service.mapper.SecureUserMapper;
 import com.app.insight.util.JwtTokenUtil;
 import com.app.insight.util.UserUtils;
+import com.app.insight.util.Utils;
 import com.app.insight.web.rest.errors.InvalidLoginOrPassword;
 import com.app.insight.web.rest.errors.ObjectNotFoundError;
 import com.app.insight.web.rest.errors.ValidationError;
@@ -22,7 +23,6 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import tech.jhipster.security.RandomUtil;
 
 import java.time.ZonedDateTime;
 import java.util.Locale;
