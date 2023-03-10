@@ -18,7 +18,7 @@ public class SecureUserMapper {
         secureUser.setLogin(appUser.getLogin());
         secureUser.setPhoneNumber(appUser.getPhoneNumber());
         secureUser.setIin(appUser.getIin());
-        secureUser.setRegion(appUser.getRegion());
+        secureUser.setCity(appUser.getCity());
         secureUser.setSchool(appUser.getSchool());
         secureUser.setCoins(appUser.getCoins());
         secureUser.setEntResult(appUser.getEntResult());

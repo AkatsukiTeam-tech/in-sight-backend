@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+
+    <changeSet id="20230310152822_update_region_city_relationship" author="s.narys">
+        <sql>
+            alter table region
+                drop constraint fk_region__city_id;
+
+            alter table region
+                drop column city_id;
+
+            alter table city
+                add region_id bigint;
+
+            alter table city
+                add constraint fk_city__region_id
+                    foreign key (region_id) references region;
+        </sql>
+    </changeSet>
+</databaseChangeLog>

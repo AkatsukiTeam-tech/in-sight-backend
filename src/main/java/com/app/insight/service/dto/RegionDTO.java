@@ -15,8 +15,6 @@ public class RegionDTO implements Serializable {
     @NotNull
     private String name;
 
-    private CityDTO city;
-
     public Long getId() {
         return id;
     }
@@ -31,14 +29,6 @@ public class RegionDTO implements Serializable {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public CityDTO getCity() {
-        return city;
-    }
-
-    public void setCity(CityDTO city) {
-        this.city = city;
     }
 
     @Override
@@ -68,7 +58,6 @@ public class RegionDTO implements Serializable {
         return "RegionDTO{" +
             "id=" + getId() +
             ", name='" + getName() + "'" +
-            ", city=" + getCity() +
             "}";
     }
 }
