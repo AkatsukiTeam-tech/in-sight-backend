@@ -6,22 +6,13 @@
 
     <changeSet id="20230310152822_update_region_city_relationship" author="s.narys">
         <sql>
-            INSERT INTO region (id, name)
-            VALUES (1,'Алматы');
-
-            INSERT INTO city (id, name, region_id)
-            VALUES (1,'Алматы',1);
-
-            INSERT INTO school (id, name)
-            VALUES (1, '32');
-
-            INSERT INTO app_user (id, first_name, middle_name, last_name, is_active, is_deleted, age, email, login, password, reg_date_time, phone_number, iin, ent_result, city_id, region_id, school_id)
-            VALUES (1,'admin','admin','admin',true,false,21,'admin@gmail.com','admin',
+            INSERT INTO app_user (id, first_name, middle_name, last_name, is_active, is_deleted, age, email, login, password, reg_date_time, phone_number, iin)
+            VALUES (0,'admin','admin','admin',true,false,21,'admin@gmail.com','admin',
                     '$2a$10$9SVE7eZQO3wfS8jYQ/QEfefxuBjy74GKrRogT6DokFt1wdfNxaVy.',
-                    '2023-03-10 10:00:11.525456','77777777777','000000000000',140,1,1,1);
+                    '2023-03-10 10:00:11.525456','','');
 
             INSERT INTO rel_app_user__app_role (app_role_id, app_user_id)
-            VALUES (1, 1);
+            VALUES (1, 0);
         </sql>
     </changeSet>
 </databaseChangeLog>
